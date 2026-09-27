@@ -49,8 +49,8 @@ const INITIAL_WISHES = [
     id: 1,
     name: "Phạm Quốc Tuấn",
     role: "Cựu học sinh",
-    cohort: "Khóa 1970 - 1973 (Cấp 3 Kim Sơn B)",
-    message: "Nhớ mãi những năm tháng học tập dưới mái trường Cấp 3 Kim Sơn B thời bom đạn, vừa học vừa đào hào tránh máy bay. 60 năm nhìn lại, trường đã đổi thay vượt bậc, rạng danh quê hương Kim Sơn ven biển. Chúc thầy và trò nhà trường luôn tự hào vững bước!",
+    cohort: "Khóa 1970 - 1973 (Cấp 3B Kim Sơn)",
+    message: "Nhớ mãi những năm tháng học tập dưới mái trường Cấp 3B Kim Sơn thời bom đạn, vừa học vừa đào hào tránh máy bay. 60 năm nhìn lại, trường đã đổi thay vượt bậc, rạng danh quê hương Kim Sơn ven biển. Chúc thầy và trò nhà trường luôn tự hào vững bước!",
     likes: 58,
     time: "3 ngày trước"
   },
@@ -59,7 +59,7 @@ const INITIAL_WISHES = [
     name: "Cô giáo Nguyễn Thị Minh",
     role: "Cựu giáo viên / Cán bộ",
     cohort: "Giảng dạy môn Văn (1985 - 2012)",
-    message: "Gần 30 năm gắn bó dưới mái trường Kim Sơn B thân yêu, mỗi chuyến đò tri thức cập bến là một niềm hạnh phúc khôn nguôi. Chúc Đại lễ 60 năm thành công rực rỡ, chúc ngôi trường mang tên cố Chủ tịch nước Trần Đại Quang mãi là cái nôi ươm mầm tài năng non sông!",
+    message: "Gần 30 năm gắn bó dưới mái trường cấp 3B Kim Sơn thân yêu, mỗi chuyến đò tri thức cập bến là một niềm hạnh phúc khôn nguôi. Chúc Đại lễ 60 năm thành công rực rỡ, chúc ngôi trường mang tên cố Chủ tịch nước Trần Đại Quang mãi là cái nôi ươm mầm tài năng non sông!",
     likes: 76,
     time: "2 ngày trước"
   },
@@ -77,7 +77,7 @@ const INITIAL_WISHES = [
     name: "Vũ Mai Phương",
     role: "Cựu học sinh",
     cohort: "Khóa 2013 - 2016",
-    message: "Khóa chúng em vinh dự được dự lễ kỷ niệm 50 năm trường và chứng kiến thời khắc Bác Trần Đại Quang về thăm trường, cắt băng khánh thành cơ sở mới. Dù đi muôn phương, con sóng lòng vẫn luôn hướng về mái trường Kim Sơn B!",
+    message: "Khóa chúng em vinh dự được dự lễ kỷ niệm 50 năm trường và chứng kiến thời khắc Bác Trần Đại Quang về thăm trường, cắt băng khánh thành cơ sở mới. Dù đi muôn phương, con sóng lòng vẫn luôn hướng về mái trường cấp 3B Kim Sơn!",
     likes: 51,
     time: "Hôm qua"
   },
@@ -323,7 +323,7 @@ function initInvitationSection() {
       }
       renderedName.textContent = name;
       if (renderedClass) {
-        renderedClass.textContent = cohort || "Cựu Học Sinh Trường THPT Trần Đại Quang (Kim Sơn B)";
+        renderedClass.textContent = cohort || "Cựu Học Sinh Trường THPT Trần Đại Quang (cấp 3B Kim Sơn)";
       }
       showToast(`✨ Đã tạo Giấy mời danh dự mang tên "${name}"!`);
       launchFireworksBurst();
@@ -421,7 +421,7 @@ function initWishesSystem() {
             <div class="wish-avatar">${initial}</div>
             <div>
               <div class="wish-name">${escapeHtml(wish.name)}</div>
-              <div class="wish-meta">${escapeHtml(wish.cohort || 'Kim Sơn B - Trần Đại Quang')}</div>
+              <div class="wish-meta">${escapeHtml(wish.cohort || 'Cấp 3B Kim Sơn - Trần Đại Quang')}</div>
             </div>
           </div>
           <span class="wish-role-badge">${escapeHtml(wish.role)}</span>
