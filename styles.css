@@ -28,7 +28,7 @@
   
   /* Nền và thẻ kính mờ (Glassmorphism tinh tế) */
   --bg-body: #edf6fd;
-  --bg-card: rgba(255, 255, 255, 0.92);
+  --bg-card: rgba(255, 255, 255, 0.75);
   --bg-card-hover: rgba(255, 255, 255, 0.98);
   --bg-glass-light: rgba(240, 249, 255, 0.85);
   
@@ -180,8 +180,9 @@ body.ocean-theme {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
   border-bottom: 1px solid var(--border-sea);
   box-shadow: 0 4px 20px rgba(2, 132, 199, 0.08);
   transition: var(--transition-normal);
@@ -409,7 +410,7 @@ body.ocean-theme {
   padding: 50px 0 90px 0;
   text-align: center;
   overflow: hidden;
-  background: linear-gradient(180deg, #e4f3fd 0%, #f0f8ff 70%, #ffffff 100%);
+  background: transparent;
 }
 
 .ocean-wave-bg {
@@ -522,7 +523,7 @@ body.ocean-theme {
   justify-content: center;
   gap: 10px;
   max-width: 760px;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(8px);
   padding: 10px 20px;
   border-radius: var(--radius-md);
   border: 1px solid rgba(14, 165, 233, 0.15);
@@ -632,16 +633,35 @@ body.ocean-theme {
    Countdown Display (Single)
    ========================================================================== */
 .countdown-display {
-  background: var(--bg-card);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--border-sea);
-  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 24px;
   padding: 35px 30px;
-  box-shadow: var(--shadow-wave);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255,255,255,0.8);
   max-width: 850px;
   width: 100%;
   margin-bottom: 35px;
   position: relative;
+  overflow: hidden;
+}
+
+/* Hiệu ứng bóng bẩy phản chiếu nước sượt ngang */
+.countdown-display::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg);
+  animation: glass-sweep 6s infinite ease-in-out;
+  pointer-events: none;
+}
+@keyframes glass-sweep {
+  0% { left: -100%; }
+  15% { left: 200%; }
+  100% { left: 200%; }
 }
 
 .target-info-banner {
@@ -687,28 +707,24 @@ body.ocean-theme {
 }
 
 .card-glass {
-  background: linear-gradient(180deg, #ffffff 0%, #f0f8ff 100%);
-  border: 1px solid var(--border-sea);
-  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
   padding: 20px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 20px rgba(2, 132, 199, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 1px rgba(255, 255, 255, 1);
   position: relative;
   overflow: hidden;
 }
 
-.card-water-reflection {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 40%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, transparent 100%);
-  pointer-events: none;
-}
+
+
+
 
 .card-number {
   font-family: var(--font-serif-title);
@@ -2228,6 +2244,23 @@ body.ocean-theme {
 }
 
 @media (max-width: 768px) {
+
+  .countdown-display {
+    padding: 20px 15px;
+    border-radius: 20px;
+  }
+  .card-glass {
+    padding: 12px 2px;
+    border-radius: 12px;
+  }
+  .card-number {
+    font-size: 1.8rem;
+  }
+  .countdown-separator {
+    font-size: 1.2rem;
+    margin: 0 -4px;
+  }
+
   .nav-links {
     display: none;
     position: absolute;
@@ -2425,4 +2458,57 @@ body.ocean-theme {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+/* ==========================================================================
+   Moving Background (Slideshow & Ken Burns)
+   ========================================================================== */
+.hero-bg-slider {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-bg-slider .slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  animation: slideFade 16s infinite;
+}
+
+.hero-bg-slider .slide-1 {
+  background-image: url('assets/school_bg1.jpg');
+  animation-delay: 0s;
+}
+
+.hero-bg-slider .slide-2 {
+  background-image: url('assets/school_bg2.jpg');
+  animation-delay: 8s;
+}
+
+.hero-bg-slider .slide-3 {
+  background-image: url('assets/school_bg3.jpg');
+  animation-delay: 16s;
+}
+
+@keyframes slideFade {
+  0% { opacity: 0; transform: scale(1); }
+  8% { opacity: 1; }
+  25% { opacity: 1; }
+  33% { opacity: 0; }
+  100% { opacity: 0; transform: scale(1.15); }
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(240,248,255,0.85) 60%, var(--bg-body) 100%);
+  z-index: 1;
 }
