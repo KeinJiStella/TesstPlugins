@@ -843,3 +843,52 @@ function showToast(message, type = 'info') {
     }, 300);
   }, 3500);
 }
+
+// ==========================================================================
+// 3D TILT EFFECT & SCROLL REVEAL (APPLE PRO STYLE)
+// ==========================================================================
+
+// 1. Vanilla 3D Tilt cho các thẻ (Cards)
+const tiltElements = document.querySelectorAll('.tilt-3d');
+tiltElements.forEach(el => {
+    el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const xPct = x / rect.width - 0.5;
+        const yPct = y / rect.height - 0.5;
+        
+        // Apple 3D depth params
+        const rotateX = yPct * -15; // deg
+        const rotateY = xPct * 15; // deg
+        
+        el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        el.style.transition = 'transform 0.1s ease-out';
+        el.style.zIndex = '10';
+    });
+    
+    el.addEventListener('mouseleave', () => {
+        el.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+        el.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+        el.style.zIndex = '1';
+    });
+});
+
+// 2. Scroll Reveal Observer (Hiện ra khi cuộn)
+const revealOptions = {
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px"
+};
+
+const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+    });
+}, revealOptions);
+
+document.querySelectorAll('.reveal-item').forEach(el => {
+    revealObserver.observe(el);
+});
