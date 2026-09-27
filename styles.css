@@ -52,7 +52,7 @@
   --radius-full: 9999px;
   
   /* Typography */
-  --font-heading: 'Playfair Display', serif;
+  --font-heading: 'Montserrat', 'Be Vietnam Pro', sans-serif;
   --font-serif-title: 'Cinzel', serif;
   --font-sans: 'Be Vietnam Pro', 'Montserrat', -apple-system, sans-serif;
   
@@ -218,7 +218,7 @@ body.ocean-theme {
 
 .school-name {
   font-weight: 800;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   letter-spacing: 0.3px;
   color: var(--sea-800);
   line-height: 1.2;
@@ -234,15 +234,16 @@ body.ocean-theme {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
 }
 
 .nav-item {
+  white-space: nowrap;
   color: var(--text-sub);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  padding: 6px 12px;
+  padding: 6px 8px;
   border-radius: var(--radius-sm);
   transition: var(--transition-fast);
   display: flex;
@@ -497,7 +498,7 @@ body.ocean-theme {
 
 .hero-title {
   font-family: var(--font-heading);
-  font-size: clamp(1.8rem, 4vw, 2.9rem);
+  font-size: clamp(1.5rem, 4vw, 2.8rem);
   font-weight: 900;
   line-height: 1.3;
   margin-bottom: 12px;
@@ -619,7 +620,7 @@ body.ocean-theme {
 
 .tab-title {
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .tab-date {
@@ -674,7 +675,7 @@ body.ocean-theme {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 8px;
   margin-bottom: 28px;
   flex-wrap: wrap;
 }
@@ -1204,7 +1205,7 @@ body.ocean-theme {
 }
 
 .perso-header p {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
 }
 
@@ -1518,7 +1519,7 @@ body.ocean-theme {
 }
 
 .timeline-card p {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-sub);
   line-height: 1.6;
   margin-bottom: 12px;
@@ -1626,7 +1627,7 @@ body.ocean-theme {
 }
 
 .stepper-content p {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-sub);
 }
 
@@ -1702,7 +1703,7 @@ body.ocean-theme {
   border: 1px solid var(--border-sea);
   border-radius: var(--radius-sm);
   padding: 10px 14px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-main);
   font-family: var(--font-sans);
   transition: var(--transition-fast);
@@ -1908,7 +1909,7 @@ body.ocean-theme {
 }
 
 .contact-card h4 {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   color: var(--sea-900);
   margin-bottom: 8px;
 }
@@ -2040,7 +2041,7 @@ body.ocean-theme {
   padding: 12px 20px;
   border-radius: var(--radius-md);
   box-shadow: 0 10px 30px rgba(2, 132, 199, 0.25);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -2197,6 +2198,19 @@ body.ocean-theme {
 /* ==========================================================================
    Responsive Breakpoints
    ========================================================================== */
+
+@media (max-width: 1200px) {
+  .nav-item {
+  white-space: nowrap; padding: 4px 6px; font-size: 0.8rem; gap: 4px; }
+  .school-name { font-size: 0.85rem; }
+  .school-authority { font-size: 0.6rem; }
+  .school-sub { font-size: 0.65rem; }
+  .brand-logo { gap: 8px; }
+  .btn-celebrate { font-size: 0.8rem; padding: 6px 12px; }
+  .nav-links { gap: 6px; }
+  .header-actions { gap: 6px; }
+}
+
 @media (max-width: 992px) {
   .footer-container {
     grid-template-columns: 1fr 1fr;
